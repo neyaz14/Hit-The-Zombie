@@ -2,6 +2,12 @@
 # and can kill the all zombie you will win.        This game is designed and developed by Neyaz Morshid.
 
 import pygame
+from time import sleep
+
+pygame.init()
+pygame.mixer.init()
+pygame.mixer.music.load('ratsasan.mp3')
+pygame.mixer.music.play(10, 0.1, 1)
 
 screen_size = [360, 530]
 
@@ -21,6 +27,9 @@ move_direction = 'right'
 egg = pygame.image.load('egg.png')
 egg_y = 50
 fired = False
+
+text = pygame.font.Font(None, 50)
+score = 0
 
 clock = pygame.time.Clock()
 keep_alive = True
@@ -65,10 +74,15 @@ while keep_alive:
         if u_index < len(useru):
             user = pygame.image.load(useru[u_index])
             user_x = 10
+            score = score + 10
+
         else:
-            print(screen.blit(winer, [15, 200]))
+            print(screen.blit(winer, [15, 200]),score, sleep(.1))
             keep_alive = True
         # ----------------------------------------------------
+#score adding code
+    score_text = text.render(f'Score: {score}', True, (232 , 122  , 23))
+    screen.blit(score_text, (0, 0))
     pygame.display.update()
     clock.tick(60)
 
